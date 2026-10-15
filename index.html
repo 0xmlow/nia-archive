@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en" data-theme="daylight">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NIA Archive</title>
+<meta name="description" content="A searchable archive of every Not Investment Advice episode: 281 shows, 2,487 chapters, six eras.">
+<link rel="icon" href="assets/nia-cover-160.jpg">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="brandlock">
+      <img class="logo" id="mlowLogo" src="brand/logo_black.png" alt="MLOW">
+      <img class="bloss" id="blossMark" src="brand/blossom/blossom_03_black.png" alt="">
+      <span class="wm">Blossom</span>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button role="tab" data-view="browse" aria-selected="true">Episodes</button>
+      <button role="tab" data-view="chapters" aria-selected="false">Chapter search</button>
+      <button role="tab" data-view="trends" aria-selected="false">Trends</button>
+      <button role="tab" data-view="hosts" aria-selected="false">Hosts</button>
+      <button role="tab" data-view="eras" aria-selected="false">Eras</button>
+      <button role="tab" data-view="ideas" aria-selected="false">Ideas</button>
+      <button role="tab" data-view="guests" aria-selected="false">Guests</button>
+      <button role="tab" data-view="about" aria-selected="false">Method</button>
+    </nav>
+    <button class="modetog" id="modeBtn">Vault</button>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="hero-in">
+    <div>
+      <span class="eyebrow">Corpus archive, refreshed with every new release</span>
+      <h1>Every episode of Not Investment Advice, indexed</h1>
+      <p class="lead">Jack Butcher, Trung Phan and Bilal Zaidi have recorded a weekly show since April 2021. This archive holds all of it: full transcripts, a chapter level topic index, and the arguments they keep returning to.</p>
+      <div class="statgrid" id="stats"></div>
+      <div class="links" id="links"></div>
+      <p class="disc">An independent analysis by Blossom Research. Not affiliated with Not Investment Advice, its hosts or Acast. The show artwork belongs to Not Investment Advice.</p>
+    </div>
+    <div class="cover"><img src="assets/nia-cover-600.jpg" alt="Not Investment Advice show artwork" width="600" height="600"></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="view on" id="v-browse">
+    <div class="vhead">
+      <div><h2>Episodes</h2>
+      <p>Search titles, chapter topics and guests. Open any card to read its full chapter list and jump straight to the moment on YouTube.</p></div>
+      <span class="count" id="browseCount"></span>
+    </div>
+    <div class="controls">
+      <div class="search"><input id="q" type="search" placeholder="Search episodes, topics, guests"></div>
+      <select id="fYear"></select>
+      <select id="fSort">
+        <option value="new">Newest first</option>
+        <option value="old">Oldest first</option>
+        <option value="long">Longest first</option>
+      </select>
+    </div>
+    <div class="chips" id="tagChips"></div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="view" id="v-chapters">
+    <div class="vhead">
+      <div><h2>Chapter search</h2>
+      <p>Every timestamped segment the hosts published, searchable as one index. Each result links to the exact second.</p></div>
+      <span class="count" id="chapCount"></span>
+    </div>
+    <div class="controls">
+      <div class="search"><input id="cq" type="search" placeholder="Try costco, tariffs, vitalik, disney, founder mode"></div>
+      <select id="cYear"></select>
+    </div>
+    <div class="chaplist" id="chapList"></div>
+  </section>
+
+  <section class="view" id="v-trends">
+    <div class="vhead"><div><h2>Trends</h2>
+    <p>What the show talked about, and when. The subject mix moved from crypto to artificial intelligence over five years.</p></div></div>
+    <div class="chartbox">
+      <canvas id="chart" height="340"></canvas>
+      <div class="legend" id="legend"></div>
+    </div>
+    <div class="vhead" style="margin-top:44px"><div><h2>Term ledger</h2>
+    <p>Raw mention counts across 4.29 million transcribed words. The episode column counts distinct episodes, which is the better measure of a lasting obsession.</p></div></div>
+    <div class="scroll"><table id="entTable"></table></div>
+  </section>
+
+  <section class="view" id="v-hosts">
+    <div class="vhead"><div><h2>The three hosts</h2>
+    <p>Lanes assigned by evidence. Counts below are chapters in the show's own timestamps that name that host.</p></div></div>
+    <div class="cols3" id="hosts"></div>
+  </section>
+
+  <section class="view" id="v-eras">
+    <div class="vhead"><div><h2>Six eras</h2>
+    <p>A real sequence, so it carries numbers. Percentages are the share of that year's indexed chapters.</p></div></div>
+    <div id="eras"></div>
+  </section>
+
+  <section class="view" id="v-ideas">
+    <div class="vhead"><div><h2>The repeating ideas</h2>
+    <p>Distilled from 1,235 high signal passages mined across the full corpus. These frameworks recur across years and subjects.</p></div></div>
+    <div class="cols2" id="ideas"></div>
+  </section>
+
+  <section class="view" id="v-guests">
+    <div class="vhead"><div><h2>Guests</h2>
+    <p>Twenty six guest appearances across 281 episodes, roughly one in eleven, and heavily weighted to the early years.</p></div></div>
+    <div class="scroll"><table id="guestTable"></table></div>
+  </section>
+
+  <section class="view" id="v-about">
+    <div class="vhead"><div><h2>Method and caveats</h2>
+    <p>How the archive was built, how to refresh it, and what to distrust.</p></div></div>
+    <div class="cols2">
+      <div class="panel prose" id="method"></div>
+      <div class="panel prose" id="howto"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="fin">
+    <img id="footLogo" src="brand/logo_black.png" alt="MLOW">
+    <img id="footBloss" src="brand/blossom/blossom_05_black.png" alt="" style="height:18px">
+    <span>An independent analysis by Blossom Research. Not affiliated with Not Investment Advice, its hosts or Acast. The show artwork belongs to Not Investment Advice. Built on the Blossom design system.</span>
+    <span id="builtAt" style="margin-left:auto"></span>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Episode detail"></aside>
+
+<script src="app.js"></script>
+</body>
+</html>
